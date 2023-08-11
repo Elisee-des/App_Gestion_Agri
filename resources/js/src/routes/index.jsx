@@ -1,24 +1,31 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import CommonLayout from "../layouts/common";
-import NotFound from "../layouts/common";
 import Loader from "../components/loader";
-import PrivateLayout from "../pages/private";
-import PrivateRoute from "./allRoute";
+import PrivateLayout from "../layouts/private";
+import CommonLayout from "../layouts/common";
+import NotFound from '../pages/common/notFound';
+import { privateRoutes } from "./allRoute";
 
+const LoginPage = React.lazy(() => import("../pages/common/login"));
 
 const MainRoutes = () => {
     return (
         <Routes>
             <Route element={<PrivateLayout />}>
-                {PrivateRoute.map((route, index) => {
+                {privateRoutes.map((route, index) => {
                     const ElementPage = route.component;
                     return (
                         <Route
                             path={route.path}
                             key={index}
                             element={
-                                <React.Suspense fallback={<><Loader /></>}>
+                                <React.Suspense
+                                    fallback={
+                                        <>
+                                            <Loader />
+                                        </>
+                                    }
+                                >
                                     <ElementPage />
                                 </React.Suspense>
                             }
@@ -31,13 +38,7 @@ const MainRoutes = () => {
                 <Route
                     path="/"
                     element={
-                        <React.Suspense
-                            fallback={
-                                <>
-                                    <Loader />
-                                </>
-                            }
-                        >
+                        <React.Suspense fallback={<><Loader /> </>}>
                             <LoginPage />
                         </React.Suspense>
                     }
