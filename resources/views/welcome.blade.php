@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>App Pratique Cordaid</title>
+        <title>Plateforme CORDAID</title>
 
         @viteReactRefresh
         @vite('resources/js/app.js')

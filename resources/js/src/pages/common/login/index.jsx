@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const LoginPage = () => {
     return (
@@ -116,7 +116,7 @@ const LoginPage = () => {
                                                 <form action="index.html">
                                                     <div className="mb-3">
                                                         <label
-                                                            for="username"
+                                                            htmlFor="username"
                                                             className="form-label"
                                                         >
                                                             Username
@@ -140,7 +140,7 @@ const LoginPage = () => {
                                                         </div>
                                                         <label
                                                             className="form-label"
-                                                            for="password-input"
+                                                            htmlFor="password-input"
                                                         >
                                                             Password
                                                         </label>
@@ -170,7 +170,7 @@ const LoginPage = () => {
                                                         />
                                                         <label
                                                             className="form-check-label"
-                                                            for="auth-remember-check"
+                                                            htmlFor="auth-remember-check"
                                                         >
                                                             Remember me
                                                         </label>

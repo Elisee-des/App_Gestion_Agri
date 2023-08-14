@@ -1,15 +1,11 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React from 'react';
 
-const BlankLayout = () => {
+const Blank = () => {
     return (
-        <>
-            <div>Common Header</div>
-            <div>
-                <Outlet />
-            </div>
-        </>
+        <div>
+            Blank
+        </div>
     );
 };
 
-export default BlankLayout;
+export default Blank;
