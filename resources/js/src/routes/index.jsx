@@ -4,6 +4,7 @@ import CommonLayout from "../layouts/common";
 import NoMatchPage from "../pages/common/NoMatch";
 import Loader from "../components/loader";
 import { privateRoutes } from './allRoutes';
+import RequireAuth from './RequireAuth';
 import PrivateLayout from "../layouts/private";
 
 const LoginPage = React.lazy(() => import("../pages/common/login"));
@@ -26,9 +27,9 @@ const MainRoutes = () => {
                                         </>
                                     }
                                 >
-                                    {/* <RequireAuth> */}
+                                    <RequireAuth>
                                         <ElementPage />
-                                    {/* </RequireAuth> */}
+                                    </RequireAuth>
                                 </React.Suspense>
                             }
                         />

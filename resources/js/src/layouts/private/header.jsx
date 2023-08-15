@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
+import AuthService from "../../services/authService";
+import { getUserData } from "../../utility/Utils";
+import { useNavigate } from "react-router-dom";
+
 
 const Header = () => {
+
+    const [url, setUrl] = useState({});
+    let navigate = useNavigate();
+
+    const logout = () => {
+        AuthService.logout()
+        console.log("ok")
+        navigate('/');
+    }
+
+    // useEffect(() => {
+    //     setUrl(window.location.pathname.replace('/admin/', ''))
+    //     if(getUserData()) {
+            
+    //     }
+    // })
+
     return (
         <header id="page-topbar">
             <div className="layout-width">
@@ -584,7 +605,7 @@ const Header = () => {
                                 <Dropdown.Menu>
                                     <Dropdown.Item href="#">Profile</Dropdown.Item>
                                     <Dropdown.Item href="#">Another action</Dropdown.Item>
-                                    <Dropdown.Item href="#">Deconnexion</Dropdown.Item>
+                                    <Dropdown.Item href="#" onClick={() => logout()}>Deconnexion</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             {/* <div className="dropdown-menu dropdown-menu-end">
