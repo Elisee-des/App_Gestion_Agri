@@ -4,7 +4,7 @@ import { getUserData } from "../utility/Utils"
 
 const RequireAuth = ({children}) => {
     const authed = getUserData();
-    console.log('authed', authed);
+    // console.log('authed', authed);
     return authed ? children : <Navigate to='/' replace />
 }
 

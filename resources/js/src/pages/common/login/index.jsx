@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ApiRoute from "../../../utility/ApiRoute";
 
 
-const LoginPage = (props) => {
+const LoginPage = () => {
 
     const [formInput, setFormInput] = useState({email:'', password:''});
     const [message, setMessage] = useState();
