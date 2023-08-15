@@ -1,4 +1,5 @@
 import React from "react";
+import { Dropdown } from "react-bootstrap";
 
 const Header = () => {
     return (
@@ -10,14 +11,14 @@ const Header = () => {
                             <a href="index.html" className="logo logo-dark">
                                 <span className="logo-sm">
                                     <img
-                                        src="assets/images/logo-sm.png"
+                                        src="../assets/images/logo-sm.png"
                                         alt=""
                                         height="22"
                                     />
                                 </span>
                                 <span className="logo-lg">
                                     <img
-                                        src="assets/images/logo-dark.png"
+                                        src="../assets/images/logo-dark.png"
                                         alt=""
                                         height="17"
                                     />
@@ -27,7 +28,7 @@ const Header = () => {
                             <a href="index.html" className="logo logo-light">
                                 <span className="logo-sm">
                                     <img
-                                        src="assets/images/logo-sm.png"
+                                        src="../assets/images/logo-sm.png"
                                         alt=""
                                         height="22"
                                     />
@@ -143,123 +144,6 @@ const Header = () => {
                                     </span>
                                 </a>
                             </div>
-                        </div>
-
-                        <div className="dropdown topbar-head-dropdown ms-1 header-item">
-                            <button
-                                type="button"
-                                className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                <i className="bx bx-category-alt fs-22"></i>
-                            </button>
-                            <div className="dropdown-menu dropdown-menu-lg p-0 dropdown-menu-end">
-                                <div className="p-3 border-top-0 border-start-0 border-end-0 border-dashed border">
-                                    <div className="row align-items-center">
-                                        <div className="col">
-                                            <h6 className="m-0 fw-semibold fs-15">
-                                                Web Apps
-                                            </h6>
-                                        </div>
-                                        <div className="col-auto">
-                                            <a
-                                                href="#!"
-                                                className="btn btn-sm btn-soft-info"
-                                            >
-                                                View All Apps
-                                                <i className="ri-arrow-right-s-line align-middle"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div className="dropdown topbar-head-dropdown ms-1 header-item">
-                            <button
-                                type="button"
-                                className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
-                                id="page-header-cart-dropdown"
-                                data-bs-toggle="dropdown"
-                                data-bs-auto-close="outside"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                <i className="bx bx-shopping-bag fs-22"></i>
-                                <span className="position-absolute topbar-badge cartitem-badge fs-10 translate-middle badge rounded-pill bg-info">
-                                    5
-                                </span>
-                            </button>
-                            <div
-                                className="dropdown-menu dropdown-menu-xl dropdown-menu-end p-0 dropdown-menu-cart"
-                                aria-labelledby="page-header-cart-dropdown"
-                            >
-                                <div className="p-3 border-top-0 border-start-0 border-end-0 border-dashed border">
-                                    <div className="row align-items-center">
-                                        <div className="col">
-                                            <h6 className="m-0 fs-16 fw-semibold">
-                                                My Cart
-                                            </h6>
-                                        </div>
-                                        <div className="col-auto">
-                                            <span className="badge badge-soft-warning fs-13">
-                                                <span className="cartitem-badge">
-                                                    7
-                                                </span>
-                                                items
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div
-                                    className="p-3 border-bottom-0 border-start-0 border-end-0 border-dashed border"
-                                    id="checkout-elem"
-                                >
-                                    <div className="d-flex justify-content-between align-items-center pb-3">
-                                        <h5 className="m-0 text-muted">
-                                            Total:
-                                        </h5>
-                                        <div className="px-2">
-                                            <h5
-                                                className="m-0"
-                                                id="cart-item-total"
-                                            >
-                                                $1258.58
-                                            </h5>
-                                        </div>
-                                    </div>
-
-                                    <a
-                                        href="apps-ecommerce-checkout.html"
-                                        className="btn btn-success text-center w-100"
-                                    >
-                                        Checkout
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="ms-1 header-item d-none d-sm-flex">
-                            <button
-                                type="button"
-                                className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
-                                data-toggle="fullscreen"
-                            >
-                                <i className="bx bx-fullscreen fs-22"></i>
-                            </button>
-                        </div>
-
-                        <div className="ms-1 header-item d-none d-sm-flex">
-                            <button
-                                type="button"
-                                className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode"
-                            >
-                                <i className="bx bx-moon fs-22"></i>
-                            </button>
                         </div>
 
                         <div className="dropdown topbar-head-dropdown ms-1 header-item">
@@ -685,31 +569,25 @@ const Header = () => {
                         </div>
 
                         <div className="dropdown ms-sm-3 header-item topbar-user">
-                            <button
-                                type="button"
-                                className="btn"
-                                id="page-header-user-dropdown"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
+                        <Dropdown>
+                                <Dropdown.Toggle variant="default" id="dropdown-basic">
                                 <span className="d-flex align-items-center">
-                                    <img
-                                        className="rounded-circle header-profile-user"
-                                        src="assets/images/users/avatar-1.jpg"
-                                        alt="Header Avatar"
-                                    />
+                                    <img className="rounded-circle header-profile-user" src="../images/users/avatar-8.jpg"
+                                        alt="Header Avatar" />
                                     <span className="text-start ms-xl-2">
-                                        <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                                            Anna Adame
-                                        </span>
-                                        <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">
-                                            Founder
-                                        </span>
+                                        <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Sabidani Elisee</span>
+                                        <span className="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
                                     </span>
                                 </span>
-                            </button>
-                            <div className="dropdown-menu dropdown-menu-end">
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="#">Profile</Dropdown.Item>
+                                    <Dropdown.Item href="#">Another action</Dropdown.Item>
+                                    <Dropdown.Item href="#">Deconnexion</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            {/* <div className="dropdown-menu dropdown-menu-end">
                                 <h6 className="dropdown-header">
                                     Welcome Anna!
                                 </h6>
@@ -735,7 +613,7 @@ const Header = () => {
                                         Logout
                                     </span>
                                 </a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

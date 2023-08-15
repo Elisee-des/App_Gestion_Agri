@@ -11,12 +11,12 @@ const Sidebar = () => {
                         <img src="images/logo-sm.png" alt="" height="22" />
                     </span>
                     <span className="logo-lg">
-                        <img src="images/logo-dark.png" alt="" height="17" />
+                        <img src="../images/logo-dark.png" alt="" height="17" />
                     </span>
                 </a>
                 <a href="index.html" className="logo logo-light">
                     <span className="logo-sm">
-                        <img src="images/logo-sm.png" alt="" height="22" />
+                        <img src="../images/logo-sm.png" alt="" height="22" />
                     </span>
                     <span className="logo-lg">
                         <img src="images/logo-light.png" alt="" height="17" />
