@@ -61,9 +61,9 @@ const Sidebar = () => {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link menu-link" href="#" role="button">
+                            <Link className="nav-link menu-link" to='/admin/profil' role="button">
                                 <i className=" ri-settings-2-line"></i> <span data-key="t-parametre">Paramètre</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul >
                 </div >
