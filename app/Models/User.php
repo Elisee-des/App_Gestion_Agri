@@ -25,6 +25,7 @@ class User extends Authenticatable
         'photo',
         'email',
         'password',
+        'faitiere_id',
     ];
 
     /**
@@ -46,4 +47,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function faitiere()
+    {
+        return $this->belongsTo(Faitiere::class);
+    }
 }

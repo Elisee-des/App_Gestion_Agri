@@ -67,9 +67,10 @@ class PaysController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pays $pays)
+    public function update(Request $request, $id)
     {
         try {
+            $pays = Pays::findOrFail($id);
             if ($pays) {
 
                 $validator = Validator::make($request->all(), [
@@ -102,7 +103,6 @@ class PaysController extends BaseController
     {
         try {
             $pays = Pays::findOrFail($idPays);
-
             if ($pays) {
                 $pays->delete();
 

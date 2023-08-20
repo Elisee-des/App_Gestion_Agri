@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer("cout_traitement_phyto")->nullable();
             $table->integer("nombre_parcelles")->nullable();
 
-            $table->foreignUuid('production_id')->references('id')->on('productions')->onDelete('cascade');
+            $table->foreignUuid('production_id')->references('id')->on('productions');
             $table->timestamps();
         });
     }

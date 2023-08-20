@@ -7,6 +7,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +33,6 @@ class UserController extends BaseController
                 'nom' => 'required',
                 'prenom' => 'required',
                 'email' => 'required',
-                'password' => 'required',
                 'telephone' => 'required',
                 'photo' => 'required',
                 'role' => 'required',
@@ -48,7 +48,9 @@ class UserController extends BaseController
             $user->telephone = $request->telephone;
             $user->role = $request->role;
             $user->email = $request->email;
-            $user->password = Hash::make($request->password);
+            $user->faitiere_id = $request->faitiere_id;
+            $password = $this->generate_password(8);
+            $user->password = Hash::make($password);
 
             if ($request->photo != null) {
 
@@ -66,6 +68,7 @@ class UserController extends BaseController
             }
             $user->save();
 
+            $this->sendMail($user, $password);
 
             return $this->sendResponse(
                 ['users' => $this->users()],
@@ -106,7 +109,6 @@ class UserController extends BaseController
                     'nom' => 'required',
                     'prenom' => 'required',
                     'email' => 'required',
-                    'password' => 'required',
                     'telephone' => 'required',
                     'photo' => 'required',
                     'role' => 'required',
@@ -121,7 +123,9 @@ class UserController extends BaseController
                 $user->telephone = $request->telephone;
                 $user->role = $request->role;
                 $user->email = $request->email;
-                $user->password = Hash::make($request->password);
+                $user->faitiere_id = $request->faitiere_id;
+                $password = $this->generate_password(8);
+                $user->password = Hash::make($password);
 
                 if ($request->photo != null) {
 
@@ -138,6 +142,7 @@ class UserController extends BaseController
                     $user->photo = $path;
                 }
                 $user->save();
+                $this->sendMail($user, $password);
 
 
                 return $this->sendResponse(
@@ -174,7 +179,36 @@ class UserController extends BaseController
 
     public function users()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
+        $users = User::with('faitiere')->orderBy('created_at', 'desc')->get();
         return  $users;
+    }
+
+
+    public function generate_password($length)
+    {
+        $chars =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' .
+            '0123456789!@#$%&';
+
+        $str = '';
+        $max = strlen($chars) - 1;
+
+        for ($i = 0; $i < $length; $i++)
+            $str .= $chars[random_int(0, $max)];
+
+        return $str;
+    }
+
+    public function sendMail($user, $password)
+    {
+        $data['nom'] = $user->nom;
+        $data['prenom'] = $user->prenom;
+        $data['email'] = $user->email;
+        $data['telephone'] = $user->telephone;
+        $data['password'] = $password;
+        $data['created_at'] = $user->created_at;
+
+        Mail::send('notify', ['data' => $data], function ($message) use ($data) {
+            $message->to($data["email"])->subject('Notification');
+        });
     }
 }

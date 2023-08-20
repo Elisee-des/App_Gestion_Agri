@@ -25,7 +25,7 @@ class GroupementSeeder extends Seeder
 
         Groupement::create([
             'denomination' => 'denomination test 1',
-            'lieu' => 'bobo',
+            //'lieu' => 'bobo',
             'email' => 'groupement_1@gmail.com',
             'telephone' => '78567897',
             'pays_id' => $pays,            
@@ -36,7 +36,7 @@ class GroupementSeeder extends Seeder
 
         Groupement::create([
             'denomination' => 'denomination test 2',
-            'lieu' => 'Gaoua',
+            //'lieu' => 'Gaoua',
             'email' => 'groupemen_1@gmail.com',
             'telephone' => '78567897',
             'pays_id' => $pays,

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('groupements', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->string("denomination");
-            $table->string("lieu");
             $table->string("logo")->nullable();
             $table->string("telephone");
             $table->string("email");

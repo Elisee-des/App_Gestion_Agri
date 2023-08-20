@@ -29,10 +29,11 @@ class GroupementController extends BaseController
      */
     public function store(Request $request)
     {
+                
         try {
             $validator = Validator::make($request->all(), [
                 'denomination' => 'required',
-                'lieu' => 'required',
+                //'lieu' => 'required',
                 'telephone' => 'required',
                 'email' => 'required',
                 'faitiere_id' => 'required',
@@ -46,7 +47,7 @@ class GroupementController extends BaseController
 
             $groupement = new Groupement();
             $groupement->denomination = $request->denomination;
-            $groupement->lieu = $request->lieu;
+            //$groupement->lieu = $request->lieu;
             $groupement->telephone = $request->telephone;
             $groupement->email = $request->email;
             $groupement->faitiere_id = $request->faitiere_id;
@@ -106,7 +107,6 @@ class GroupementController extends BaseController
 
                 $validator = Validator::make($request->all(), [
                     'denomination' => 'required',
-                    'lieu' => 'required',
                     'telephone' => 'required',
                     'email' => 'required',
                     'pays_id' => 'required',
@@ -120,7 +120,7 @@ class GroupementController extends BaseController
                 }
 
                 $groupement->denomination = $request->denomination;
-                $groupement->lieu = $request->lieu;
+                //$groupement->lieu = $request->lieu;
                 $groupement->telephone = $request->telephone;
                 $groupement->email = $request->email;
                 $groupement->faitiere_id = $request->faitiere_id;
@@ -178,7 +178,7 @@ class GroupementController extends BaseController
 
     public function groupements()
     {
-        $groupements = Groupement::orderBy('created_at', 'desc')->get();
+        $groupements = Groupement::with(['faitiere','province','region'])->orderBy('created_at', 'desc')->get();
         return $groupements;
     }
 }

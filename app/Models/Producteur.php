@@ -32,4 +32,8 @@ class Producteur extends Model
     {
         return $this->hasMany(Production::class);
     }
+    public function groupement()
+    {
+        return $this->belongsTo(Groupement::class);
+    }
 }

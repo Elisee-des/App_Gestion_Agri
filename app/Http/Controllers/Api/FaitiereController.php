@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Faitiere\CreateRequest;
-use App\Http\Requests\Faitiere\UpdateRequest;
 use App\Models\Faitiere;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class FaitiereController extends BaseController
 {
@@ -24,9 +23,22 @@ class FaitiereController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateRequest $request)
+    public function store(Request $request)
     {
         try {
+
+            $validator = Validator::make($request->all(), [
+                'nom' => 'required',
+                'email' => 'required',
+                'telephone' => 'required',
+                'pays_id' => 'required',
+                'region_id' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError('Erreur de validation des champs.', $validator->errors(), 400);
+            }
+
             $faitiere = new Faitiere();
             $faitiere->nom = $request->nom;
             $faitiere->telephone = $request->telephone;
@@ -78,9 +90,22 @@ class FaitiereController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, Faitiere $faitiere)
+    public function update(Request $request, Faitiere $faitiere)
     {
-        try {
+           try {
+
+            $validator = Validator::make($request->all(), [
+                'nom' => 'required',
+                'email' => 'required',
+                'telephone' => 'required',
+                'pays_id' => 'required',
+                'region_id' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError('Erreur de validation des champs.', $validator->errors(), 400);
+            }
+
             if ($faitiere) {
                 $faitiere->nom = $request->nom;
                 $faitiere->telephone = $request->telephone;
@@ -121,10 +146,14 @@ class FaitiereController extends BaseController
     {
         try {
             if ($faitiere) {
+            if ($faitiere->groupements !=null) {
                 $faitiere->delete();
                 return $this->sendResponse(['faitieres' => $this->faitieres()], 'faitiere supprimer avec succes. Une faitiere a été mise a jour avec success. Retour de la liste des faitieres');
             } else {
-                return $this->sendError('Cette faitiere n\'existe pas', 401);
+                return $this->sendError('Erreur de suppression','Il existe des groupements liés à cette faitières', 401);
+            }
+            } else {
+                return $this->sendError('Erreur de suppression','Cette faitiere n\'existe pas', 401);
             }
         } catch (Exception $e) {
             return response()->json($e);
@@ -133,7 +162,7 @@ class FaitiereController extends BaseController
 
     public function faitieres()
     {
-        $faitieres = Faitiere::orderBy('created_at', 'desc')->get();
+        $faitieres = Faitiere::with(['pays', 'region'])->orderBy('created_at', 'desc')->get();
         return $faitieres;
     }
 }

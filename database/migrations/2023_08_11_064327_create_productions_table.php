@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('productions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-
             $table->string("type_culture");
             $table->integer("bio_quantite_semences")->nullable();
             $table->integer("bio_cout_semences")->nullable();
@@ -44,7 +43,7 @@ return new class extends Migration
             $table->integer("conv_cout_planage_sols")->nullable();
             $table->integer("conv_cout_labour_sols")->nullable();
 
-            $table->foreignUuid('producteur_id')->references('id')->on('producteurs')->onDelete('cascade');
+            $table->foreignUuid('producteur_id')->references('id')->on('producteurs');
             $table->timestamps();
         });
     }

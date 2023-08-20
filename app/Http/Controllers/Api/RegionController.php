@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Region;
+use App\Models\Province;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +18,14 @@ class RegionController extends BaseController
     public function index()
     {
         return $this->sendResponse(['regions' => $this->regions()], 'Liste des regions');
+    }
+    public function ville(Request $request, $id)
+    {
+        return $this->sendResponse(['regions' => Region::where('pays_id', $request->id)->get()], 'Liste des regions');
+    }
+    public function province(Request $request, $id)
+    {
+        return $this->sendResponse(['provinces' => Province::where('region_id', $request->id)->get()], 'Liste des regions');
     }
 
     /**
@@ -69,9 +78,11 @@ class RegionController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Region $region)
+    public function update(Request $request, $id)
     {
         try {
+            $region = Region::findOrFail($id);
+
             if ($region) {
 
                 $validator = Validator::make($request->all(), [
@@ -107,9 +118,13 @@ class RegionController extends BaseController
         try {
             $region = Region::findOrFail($idRegion);
 
+            if ($region->groupements !=null || $region->provinces !=null ||$region->faitieres!=null ) {
+                # code...
+                return $this->sendResponse(['regions' => $this->regions()], 'Region supprimer avec succes. Retour de la liste des regions');
+            }
+            return $this->sendResponse(['regions' => $region->groupements], 'Region supprimer avec succes. Retour de la liste des regions');
             if ($region) {
                 $region->delete();
-
                 return $this->sendResponse(['regions' => $this->regions()], 'Region supprimer avec succes. Retour de la liste des regions');
             } else {
                 return $this->sendError('Cette region n\'existe pas', 401);
@@ -121,7 +136,7 @@ class RegionController extends BaseController
 
     public function regions()
     {
-        $regions = Region::orderBy('created_at', 'desc')->get();
+        $regions = Region::with("pays")->get();
         return $regions;
     }
 }

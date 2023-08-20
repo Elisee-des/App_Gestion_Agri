@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer("nombre_enfant");
             $table->string("localisation");
             $table->mediumText("photo");
-            $table->foreignUuid('groupement_id')->references('id')->on('groupements')->onDelete('cascade');
+            $table->foreignUuid('groupement_id')->references('id')->on('groupements');
             $table->timestamps();
         });
     }

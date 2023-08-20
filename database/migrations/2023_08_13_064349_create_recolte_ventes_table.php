@@ -32,7 +32,7 @@ return new class extends Migration
             $table->integer("age_44_56_ans")->nullable();
             $table->integer("age_57_et_plus")->nullable();
 
-            $table->foreignUuid('suite_production_id')->references('id')->on('suite_productions')->onDelete('cascade');
+            $table->foreignUuid('suite_production_id')->references('id')->on('suite_productions');
             $table->timestamps();
         });
     }
